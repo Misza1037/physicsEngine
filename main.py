@@ -18,7 +18,7 @@ while mainLoopRunning:
             mainLoopRunning = False
     screen.fill(activeBackgroundColor)
     for object in PB.objects:
-        PB.objects[object].setNewXY()
+        PB.objects[object].cycle()
         PB.objects[object].draw()
     pygame.display.flip()
     sleep(.01)

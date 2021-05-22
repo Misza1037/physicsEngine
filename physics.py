@@ -40,7 +40,7 @@ class PhysObject:
         self.color = color
         self.r = r
         self.v0 = Vector(0,0)
-
+        self.temporaryForce = []
 
     def applyForce(self, forceVector, ID):
         if ID in self.externalForces:
@@ -50,7 +50,6 @@ class PhysObject:
                 raise ValueError('occupied')#!
         else:
             self.externalForces[ID] = forceVector
-
 
     def removeForce(self, ID):
         if ID in self.externalForces:
@@ -69,12 +68,18 @@ class PhysObject:
         rv = self.v0 + self.acceleration() * self._physBase.dtv
         self.v0 = rv
         return rv
-    def setNewXY(self):
+    def cycle(self):
+         self.temporaryForce = []
          vel = self.velocity() * self._physBase.dtv
          print(vel)
          self.x += vel.x
          self.y += vel.y
-
+    def implementTemporaryForce(self, forceVector):
+        self.temporaryForce.append(forceVector)
+    def applyGravitationalForce(self, other):
+        ox = other.x
+        oy = other.y
+        other.implementTemporaryForce(gForce)
     def draw(self):
         pygame.draw.circle(self._physBase.screen, self.color, (int(self.x), int(self.y)), self.r)
 if __name__ == '__MAIN__':
