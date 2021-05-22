@@ -32,7 +32,8 @@ class PhysObject:
             raise TypeError('PhysObject.__init__(): mass | invalid type')
         self.mass = mass
         self._physBase = _physBase
-
+    def applyForce(self, forceVector):
+        pass
 
 
 if __name__ == '__MAIN__':
