@@ -1,3 +1,4 @@
+#main.py
 import physics
 import pygame
 from vectors import Vector
